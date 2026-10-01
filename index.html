@@ -8,59 +8,59 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-user-select: none; touch-action: none; }
         body, html { width: 100%; height: 100%; overflow: hidden; background: #111; font-family: Arial, sans-serif; }
-        
+
         .screen { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .hidden { display: none !important; }
-        
+
         #main-menu { background: linear-gradient(135deg, #1d2b64 0%, #f8cdda 100%); color: white; padding: 20px; text-align: center; }
         #main-menu h1 { font-size: 28px; text-shadow: 3px 3px 0px #000; margin-bottom: 20px; }
-        
+
         .language-selector { position: absolute; top: 15px; right: 15px; display: flex; gap: 8px; }
         .language-selector button { background: white; border: 2px solid #333; padding: 6px 10px; border-radius: 12px; font-weight: bold; cursor: pointer; }
         .language-selector button.active { background: #ffd700; border-color: #ff8f00; }
-        
+
         .menu-box { background: rgba(0,0,0,0.6); padding: 25px; border-radius: 24px; border: 4px solid #fff; max-width: 600px; width: 95%; }
         #playerName { width: 100%; padding: 14px; font-size: 18px; border-radius: 12px; border: 3px solid #ff9d00; text-align: center; margin-bottom: 15px; background: rgba(255,255,255,0.1); color: #fff; }
         #playerName::placeholder { color: rgba(255,255,255,0.5); }
-        
+
         .menu-box h3 { color: #ffd700; margin-bottom: 10px; }
         .hero-selection { display: flex; justify-content: center; gap: 10px; margin: 15px 0 25px 0; flex-wrap: wrap; }
         .hero-card { background: #333; padding: 10px 15px; border-radius: 15px; border: 3px solid transparent; cursor: pointer; font-size: 28px; display: flex; flex-direction: column; align-items: center; }
         .hero-card span { font-size: 11px; color: white; margin-top: 5px; }
         .hero-card.active { border-color: #00ff66; background: #1a3a1a; transform: scale(1.08); }
-        
+
         .pulse-button { background: #00cc44; color: white; border: none; border-bottom: 5px solid #009933; padding: 14px 30px; font-size: 18px; font-weight: bold; border-radius: 30px; cursor: pointer; animation: pulse 1.5s infinite; }
         .pulse-button:disabled { opacity: 0.5; animation: none; }
-        
+
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
-        
+
         #game-container { background: #000; position: relative; }
         #gameCanvas { width: 100%; height: 100%; display: block; }
-        
+
         .game-hud { position: absolute; top: 10px; left: 0; width: 100%; padding: 0 12px; display: flex; justify-content: space-between; z-index: 10; pointer-events: none; }
         .hud-left, .hud-right { background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 15px; border: 2px solid rgba(255,255,255,0.3); color: white; display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: bold; }
-        
+
         .fuel-bar-container { display: flex; flex-direction: column; width: 90px; gap: 3px; }
         .fuel-bar-container span { font-size: 10px; color: #aaa; }
         .fuel-bar { height: 10px; background: #00ff66; border-radius: 5px; width: 100%; transition: width 0.2s; }
         .fuel-bar.low { background: #ff4444; animation: fuelPulse 0.5s infinite; }
         @keyframes fuelPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-        
+
         .mobile-controls { position: absolute; bottom: 20px; left: 0; width: 100%; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
         #joystick-zone { width: 130px; height: 130px; display: flex; justify-content: center; align-items: center; }
         #joystick-base { width: 100px; height: 100px; background: rgba(255,255,255,0.15); border: 3px solid rgba(255,255,255,0.4); border-radius: 50%; position: relative; }
         #joystick-stick { width: 44px; height: 44px; background: radial-gradient(circle, #ffffff, #cccccc); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        
+
         #action-btn { width: 85px; height: 85px; background: linear-gradient(135deg, #ff0055 0%, #990033 100%); border: 4px solid white; border-radius: 50%; color: white; font-size: 26px; font-weight: bold; cursor: pointer; }
         #action-btn span { font-size: 11px; }
-        
+
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .modal-content { background: linear-gradient(135deg, #ff9d00 0%, #ff6200 100%); border: 6px solid #fff; border-radius: 24px; padding: 25px; width: 90%; max-width: 480px; text-align: center; animation: popIn 0.5s; }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-        
+
         .trophy-icon { font-size: 50px; animation: wiggle 1s ease-in-out infinite alternate; }
         @keyframes wiggle { 0% { transform: rotate(-10deg); } 100% { transform: rotate(10deg); } }
-        
+
         .modal-header h2 { color: #fff; font-size: 24px; text-shadow: 3px 3px 0 rgba(0,0,0,0.3); margin-top: 5px; }
         .victory-text { background: rgba(255,255,255,0.2); border-radius: 12px; padding: 15px; color: white; font-weight: bold; margin-top: 10px; font-size: 14px; line-height: 1.5; }
         .stars-reward { margin: 15px 0; font-size: 35px; }
@@ -77,17 +77,17 @@
         </div>
 
         <h1 id="menu-title">BAJTE BROTHERS – REŠAVALAČKA MISIJA</h1>
-        
+
         <div class="menu-box">
             <input type="text" id="playerName" placeholder="Unesi svoje herojsko ime...">
-            
+
             <h3 id="select-hero">Odaberi svog heroja:</h3>
             <div class="hero-selection">
                 <div class="hero-card active" onclick="selectHero('alex', this)">🧑‍🚀 <span>Alex</span></div>
                 <div class="hero-card" onclick="selectHero('mia', this)">👩‍🚀 <span>Mia</span></div>
                 <div class="hero-card" onclick="selectHero('kevin', this)">👨‍🔧 <span>Kevin</span></div>
-                <div class="hero-card" onclick="selectHero('lara', this)">👩‍ <span>Lara</span></div>
-                <div class="hero-card" onclick="selectHero('nova', this)">🤖 <span>Nova</span></div>
+                <div class="hero-card" onclick="selectHero('lara', this)">👩 <span>Lara</span></div>
+                <div class="hero-card" onclick="selectHero('nova', this)">‍🤖 <span>Nova</span></div>
             </div>
 
             <button id="startBtn" class="pulse-button" onclick="startGame()">KRENI U MISIJU! 🚀</button>
@@ -207,7 +207,7 @@
             document.getElementById('playerName').placeholder = t.placeholder;
             document.getElementById('select-hero').textContent = t.selectHero;
             document.getElementById('startBtn').textContent = t.startBtn;
-            
+
             document.querySelectorAll('.language-selector button').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
@@ -221,53 +221,53 @@
         function startGame() {
             playerName = document.getElementById('playerName').value || 'Heroj';
             document.getElementById('display-name').textContent = playerName;
-            
+
             document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('game-container').classList.remove('hidden');
-            
+
             audioMessage.play().catch(e => console.log('Audio blockiert'));
             audioLong.play().catch(e => console.log('Audio blockiert'));
-            
+
             initGame();
         }
 
         function initGame() {
             const canvas = document.getElementById('gameCanvas');
             const ctx = canvas.getContext('2d');
-            
+
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            
+
             fuel = 100;
             stars = 0;
             coins = 0;
             playerX = 100;
             playerY = canvas.height - 200;
             gameRunning = true;
-            
+
             gameLoop(canvas, ctx);
         }
 
         function gameLoop(canvas, ctx) {
             if (!gameRunning) return;
-            
+
             // Update
             if (joystickActive) {
                 playerVX += joystickDX * 0.5;
                 playerVY += joystickDY * 0.3;
             }
-            
+
             playerVX *= 0.9;
             playerVY *= 0.9;
             playerX += playerVX;
             playerY += playerVY;
-            
+
             // Grenzen
             if (playerX < 30) playerX = 30;
             if (playerX > canvas.width - 30) playerX = canvas.width - 30;
             if (playerY < 50) playerY = 50;
             if (playerY > canvas.height - 100) playerY = canvas.height - 100;
-            
+
             // Treibstoff
             fuel -= 0.1;
             if (fuel <= 0) {
@@ -276,32 +276,32 @@
                 alert('Nema više goriva!');
                 return;
             }
-            
+
             document.getElementById('fuel-bar').style.width = fuel + '%';
             if (fuel < 30) document.getElementById('fuel-bar').classList.add('low');
-            
+
             // Render
             ctx.fillStyle = '#1b5e20';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             // Boden
             ctx.fillStyle = '#5d4037';
             ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
-            
+
             // Spieler
             ctx.fillStyle = '#ff6b35';
             ctx.fillRect(playerX - 20, playerY - 15, 40, 30);
             ctx.font = '20px Arial';
             ctx.textAlign = 'center';
             ctx.fillText('🚜', playerX, playerY + 5);
-            
+
             // Käfig am Ende
             ctx.strokeStyle = '#9e9e9e';
             ctx.lineWidth = 3;
             ctx.strokeRect(canvas.width - 150, canvas.height - 200, 60, 80);
             ctx.font = '30px Arial';
             ctx.fillText('🐿', canvas.width - 120, canvas.height - 150);
-            
+
             requestAnimationFrame(() => gameLoop(canvas, ctx));
         }
 
@@ -312,7 +312,7 @@
                 gameRunning = false;
                 audioLong.pause();
                 audioShort.play();
-                
+
                 document.getElementById('victory-message').textContent = translations[currentLang].message(playerName);
                 document.getElementById('level-complete-modal').classList.remove('hidden');
             }
@@ -327,30 +327,30 @@
         // ============ JOYSTICK ============
         const joystickBase = document.getElementById('joystick-base');
         const joystickStick = document.getElementById('joystick-stick');
-        
+
         joystickBase.addEventListener('touchstart', (e) => {
             e.preventDefault();
             joystickActive = true;
         });
-        
+
         joystickBase.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
             const rect = joystickBase.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            
+
             const dx = touch.clientX - centerX;
             const dy = touch.clientY - centerY;
             const dist = Math.min(Math.sqrt(dx * dx + dy * dy), 40);
             const angle = Math.atan2(dy, dx);
-            
+
             joystickDX = Math.cos(angle) * (dist / 40);
             joystickDY = Math.sin(angle) * (dist / 40);
-            
+
             joystickStick.style.transform = `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px))`;
         });
-        
+
         joystickBase.addEventListener('touchend', (e) => {
             e.preventDefault();
             joystickActive = false;
